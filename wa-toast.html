@@ -1,0 +1,58 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="wa-toast">
+    <template>
+        <style include="shared-styles">
+            :host {
+                display: block;
+            }            
+        </style>
+
+        <paper-toast id="toast" on-opened-changed="_toastChanged"></paper-toast>
+        
+    </template>
+
+    <script>
+        class WaToast extends Polymer.Element {
+            static get is() { return 'wa-toast'; }
+            static get properties() {
+                return {
+					pendingToasts: {
+						type: Array,
+						value: []
+					}
+                }
+            }
+            static get observers() {
+                return [
+                    '_refreshStatus(statusKnown, signedIn, user)'
+                ]
+            }
+            _handleToast(e){
+				if(this.$.toast.opened){
+					this.pendingToasts.push({
+						text: e.detail.text,
+						class: e.detail.class
+					})
+				}else{
+					this._showToast(e.detail.text, e.detail.class);
+				}
+			}
+			_toastChanged(e){
+				if(!this.$.toast.opened){
+					if(this.pendingToasts.length){
+						this._showToast(this.pendingToasts[0].text, this.pendingToasts[0].class);
+						this.pendingToasts.shift();
+					}
+				}
+			}
+			_showToast(text, c){
+				this.$.toast.text = text;
+				this.$.toast.className = c;
+				this.$.toast.open();
+			}            
+        }
+
+        window.customElements.define(WaToast.is, WaToast);
+    </script>
+</dom-module>

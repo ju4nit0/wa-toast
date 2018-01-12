@@ -1,0 +1,20 @@
+{
+	"name": "wa-toast",
+	"version": "0.1.0",
+	"authors": [
+		"ju4nit0 (White App)"
+	],
+	"keywords": [
+		"toast"
+	],
+	"description": "custom toast handler",
+	"main": "wa-toast.html",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/ju4nit0/wa-toast.git"
+	},
+	"license": "MIT",
+	"homepage": "https://github.com/ju4nit0/wa-toast",
+	"private": false,
+	"ignore": []
+}
