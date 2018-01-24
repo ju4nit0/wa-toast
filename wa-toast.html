@@ -6,7 +6,13 @@
         <style include="shared-styles">
             :host {
                 display: block;
-            }            
+			}
+			paper-toast.good{
+				background-color: var(--google-green-500);
+			}
+			paper-toast.bad{
+				background-color: var(--google-red-500);
+			}
         </style>
 
         <paper-toast id="toast" on-opened-changed="_toastChanged"></paper-toast>
