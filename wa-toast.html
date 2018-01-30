@@ -39,23 +39,31 @@
 				if(this.$.toast.opened){
 					this.pendingToasts.push({
 						text: e.detail.text,
-						class: e.detail.class
+						class: e.detail.class,
+						duration: e.detail.duration
 					})
 				}else{
-					this._showToast(e.detail.text, e.detail.class);
+					this._showToast(e.detail.text, e.detail.class, e.detail.duration);
 				}
 			}
 			_toastChanged(e){
 				if(!this.$.toast.opened){
 					if(this.pendingToasts.length){
-						this._showToast(this.pendingToasts[0].text, this.pendingToasts[0].class);
+						this._showToast(this.pendingToasts[0].text, this.pendingToasts[0].class, this.pendingToasts[0].duration);
 						this.pendingToasts.shift();
 					}
 				}
 			}
-			_showToast(text, c){
+			_showToast(text, c, d){
 				this.$.toast.text = text;
 				this.$.toast.className = c;
+				if(typeof d != undefined && d > 0)
+				{
+					this.$.toast.duration = d;
+				}else{
+					this.$.toast.duration = 200;
+				}
+				
 				this.$.toast.open();
 			}            
         }
